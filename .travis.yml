@@ -1,0 +1,23 @@
+language: python
+
+python:
+  - 3.6
+
+branches:
+  only:
+    - source
+
+install:
+  - pip install deecubes
+
+script:
+  - deecubes -r ./raw -o ./output/docs --sync
+
+deploy:
+  provider: pages
+  local_dir: output
+  target_branch: master
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: source
